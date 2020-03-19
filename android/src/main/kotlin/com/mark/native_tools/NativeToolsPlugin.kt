@@ -8,7 +8,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar
 /** NativeToolsPlugin */
 public class NativeToolsPlugin : FlutterPlugin {
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        
+
     }
 
     // This static function is optional and equivalent to onAttachedToEngine. It supports the old
@@ -24,7 +24,9 @@ public class NativeToolsPlugin : FlutterPlugin {
         @JvmStatic
         fun registerWith(registrar: Registrar) {
             val _screenChannel = MethodChannel(registrar.messenger(), "mark.screen")
-            _screenChannel.setMethodCallHandler(Screen())
+            val screen = Screen()
+            screen.registRegistrar(registrar)
+            _screenChannel.setMethodCallHandler(screen)
         }
     }
 

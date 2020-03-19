@@ -9,9 +9,13 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.PluginRegistry
 import java.lang.Exception
 
-class Screen : MethodChannel.MethodCallHandler, ActivityAware {
+class Screen : MethodChannel.MethodCallHandler {
 
-    lateinit var _binding: ActivityPluginBinding
+    lateinit var _binding: PluginRegistry.Registrar
+
+    fun registRegistrar(registrar: PluginRegistry.Registrar){
+        _binding = registrar
+    }
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         when (call.method) {
@@ -25,7 +29,7 @@ class Screen : MethodChannel.MethodCallHandler, ActivityAware {
     private fun controlScreenOn(call: MethodCall, result: MethodChannel.Result) {
         val param = call.arguments as Map<*, *>
         val toOn = param["on"]
-        val window = _binding.activity.window
+        val window = _binding.activity().window
         try {
             when (toOn) {
                 true -> window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -36,19 +40,4 @@ class Screen : MethodChannel.MethodCallHandler, ActivityAware {
             result.success(ResponseResult(isOkey = false, message = e.toString()).toMap())
         }
     }
-
-
-    override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-        _binding = binding
-    }
-
-    override fun onDetachedFromActivity() {}
-
-    override fun onDetachedFromActivityForConfigChanges() {}
-
-    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
-        _binding = binding
-    }
-
-
 }
