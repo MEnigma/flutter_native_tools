@@ -8,8 +8,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar
 /** NativeToolsPlugin */
 public class NativeToolsPlugin : FlutterPlugin {
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        val _screenChannel = MethodChannel(flutterPluginBinding.binaryMessenger, "mark.screen")
-        _screenChannel.setMethodCallHandler(Screen())
+        
     }
 
     // This static function is optional and equivalent to onAttachedToEngine. It supports the old
@@ -23,7 +22,10 @@ public class NativeToolsPlugin : FlutterPlugin {
     // in the same class.
     companion object {
         @JvmStatic
-        fun registerWith(registrar: Registrar) {}
+        fun registerWith(registrar: Registrar) {
+            val _screenChannel = MethodChannel(registrar.messenger(), "mark.screen")
+            _screenChannel.setMethodCallHandler(Screen())
+        }
     }
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
