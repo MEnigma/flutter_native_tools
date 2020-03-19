@@ -19,17 +19,36 @@ class _MyAppState extends State<MyApp> {
     super.initState();
   }
 
+  List<CellItem> _items() => [CellItem(title: "屏幕常亮", action: () {})];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          elevation: 0,
+          title: const Text('Native tools'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: ListView(
+          children: _items()
+              .map((item) => Container(
+                    margin: EdgeInsets.only(bottom: 10),
+                    color: Colors.white,
+                    child: ListTile(
+                      onTap: item.action,
+                      title: Text(item.title),
+                    ),
+                  ))
+              .toList(),
         ),
       ),
     );
   }
+}
+
+class CellItem {
+  String title;
+  Function action;
+
+  CellItem({this.title, this.action});
 }
