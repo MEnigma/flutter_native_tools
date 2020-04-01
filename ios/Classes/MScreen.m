@@ -16,7 +16,7 @@
 }
 
 + (void)registerWithRegistrar:(nonnull NSObject<FlutterPluginRegistrar> *)registrar {
-    FlutterMethodChannel *channel = [FlutterMethodChannel.alloc initWithName:@"mark.screen" binaryMessenger:registrar.messenger codec:[FlutterStandardMethodCodec new]];
+    FlutterMethodChannel *channel = [FlutterMethodChannel methodChannelWithName:@"mark.screen" binaryMessenger:registrar.messenger];
     [registrar addMethodCallDelegate:[self new] channel:channel];
 }
 
