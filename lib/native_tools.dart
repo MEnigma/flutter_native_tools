@@ -5,3 +5,5 @@
 */
 
 export './tools/screen.dart' show MScreen;
+export './tools/media.dart' show MMediaTools;
+export './tools/file.dart' show MFileTools;

@@ -34,3 +34,9 @@
     return result;
 }
 @end
+
+@implementation MMediaResponse
+@end
+
+@implementation MFileResponse
+@end

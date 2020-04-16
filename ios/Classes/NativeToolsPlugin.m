@@ -8,8 +8,13 @@
 
 #endif
 #import "MScreen.h"
+#import "MMedia.h"
+#import "MFile.h"
+
 @implementation NativeToolsPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
     [MScreen registerWithRegistrar:registrar];
+    [MMedia registerWithRegistrar:registrar];
+    [MFile registerWithRegistrar:registrar];
 }
 @end
